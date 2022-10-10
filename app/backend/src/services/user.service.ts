@@ -11,7 +11,7 @@ export default class UserService {
   constructor(private userModel: typeof User) { }
 
   async login(login: ILogin): Promise<string> {
-    if (!login.email) {
+    if (!login.email || !login.password) {
       throw new AppError(statusCode.BAD_REQUEST, 'All fields must be filled');
     }
 
