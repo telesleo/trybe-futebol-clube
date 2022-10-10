@@ -2,7 +2,7 @@ import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import { app } from '../app';
-import login from '../mocks/login';
+import login, { invalidLogin } from '../mocks/login';
 
 chai.use(chaiHttp);
 
@@ -29,6 +29,26 @@ describe('/login endpoint', () => {
 
       expect(response).to.have.status(400);
       expect(response.body.message).to.be.eq('All fields must be filled');
+    });
+
+    it('cannot log in if email is invalid', async () => {
+      const response = await chai.request(app).post('/login').send({
+        email: invalidLogin.email,
+        password: login.password,
+      });
+
+      expect(response).to.have.status(401);
+      expect(response.body.message).to.be.eq('Incorrect email or password');
+    });
+
+    it('cannot log in if password is invalid', async () => {
+      const response = await chai.request(app).post('/login').send({
+        email: login.email,
+        password: invalidLogin.password,
+      });
+
+      expect(response).to.have.status(401);
+      expect(response.body.message).to.be.eq('Incorrect email or password');
     });
   });
 });
