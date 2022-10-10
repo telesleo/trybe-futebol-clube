@@ -17,7 +17,7 @@ export default class UserService {
 
     const user = await this.userModel.findOne(
       { where: { email: login.email } },
-    ) as ILogin;
+    );
 
     if (!user || !compareSync(login.password, user.password)) {
       throw new AppError(statusCode.UNAUTHORIZED, 'Incorrect email or password');
@@ -25,7 +25,7 @@ export default class UserService {
 
     const { JWT_SECRET } = process.env;
 
-    const token = sign({ id: user.id }, JWT_SECRET as string, { expiresIn: '7d' });
+    const token = sign({ id: user.id, role: user.role }, JWT_SECRET as string, { expiresIn: '7d' });
 
     return token;
   }
