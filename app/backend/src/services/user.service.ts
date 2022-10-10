@@ -29,12 +29,4 @@ export default class UserService {
 
     return token;
   }
-
-  // static validateLogin(token: string): JwtPayload {
-  //   const { JWT_SECRET } = process.env;
-
-  //   const { role } = verify(token, JWT_SECRET as string) as JwtPayload;
-
-  //   return role;
-  // }
 }
