@@ -11,6 +11,10 @@ export default class UserService {
   constructor(private userModel: typeof User) { }
 
   async login(login: ILogin): Promise<string> {
+    if (!login.email) {
+      throw new AppError(statusCode.BAD_REQUEST, 'All fields must be filled');
+    }
+
     const user = await this.userModel.findOne(
       { where: { email: login.email } },
     ) as ILogin;
