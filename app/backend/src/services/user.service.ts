@@ -20,7 +20,7 @@ export default class UserService {
     ) as ILogin;
 
     if (!user || !compareSync(login.password, user.password)) {
-      throw new AppError(statusCode.BAD_REQUEST, 'Incorrect email or password');
+      throw new AppError(statusCode.UNAUTHORIZED, 'Incorrect email or password');
     }
 
     const { JWT_SECRET } = process.env;
