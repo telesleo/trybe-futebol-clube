@@ -1,5 +1,5 @@
 import { compareSync } from 'bcryptjs';
-import { JwtPayload, sign, verify } from 'jsonwebtoken';
+import { sign } from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 import AppError, { statusCode } from '../utils/error';
 import ILogin from '../interfaces/ILogin';
@@ -30,11 +30,11 @@ export default class UserService {
     return token;
   }
 
-  validateLogin(token: string): JwtPayload {
-    const { JWT_SECRET } = process.env;
+  // static validateLogin(token: string): JwtPayload {
+  //   const { JWT_SECRET } = process.env;
 
-    const { role } = verify(token, JWT_SECRET as string) as JwtPayload;
+  //   const { role } = verify(token, JWT_SECRET as string) as JwtPayload;
 
-    return role;
-  }
+  //   return role;
+  // }
 }
