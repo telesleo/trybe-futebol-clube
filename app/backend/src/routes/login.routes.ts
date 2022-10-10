@@ -7,6 +7,8 @@ const login = Router();
 
 const userController = new UserController(new UserService(User));
 
+login.get('/validate', (req: Request, res: Response, next: NextFunction) =>
+  userController.validateLogin(req, res, next));
 login.post('/', (req: Request, res: Response, next: NextFunction) =>
   userController.login(req, res, next));
 
