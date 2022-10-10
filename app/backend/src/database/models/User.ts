@@ -17,19 +17,19 @@ User.init({
     type: INTEGER,
   },
   username: {
-    allowNull: true,
+    allowNull: false,
     type: STRING(256),
   },
   role: {
-    allowNull: true,
+    allowNull: false,
     type: STRING(256),
   },
   email: {
-    allowNull: true,
+    allowNull: false,
     type: STRING(256),
   },
   password: {
-    allowNull: true,
+    allowNull: false,
     type: STRING(256),
   },
 }, {
