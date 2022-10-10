@@ -14,4 +14,15 @@ export default class userController {
       return next(error);
     }
   }
+
+  validateLogin(req: Request, res: Response, next: NextFunction) {
+    const token = req.headers.authorization as string;
+
+    try {
+      const role = this.userService.validateLogin(token);
+      return res.json({ role });
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
