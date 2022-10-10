@@ -2,7 +2,7 @@ import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import { app } from '../app';
-import login, { invalidLogin } from '../mocks/login';
+import login, { invalidLogin, token, invalidToken } from '../mocks/login';
 
 chai.use(chaiHttp);
 
@@ -49,6 +49,26 @@ describe('/login endpoint', () => {
 
       expect(response).to.have.status(401);
       expect(response.body.message).to.be.eq('Incorrect email or password');
+    });
+  });
+});
+
+describe('/login/validate endpoint', () => {
+  describe('GET', () => {
+    it('should return user role', async () => {
+      const response = await chai.request(app).get('/login/validate')
+        .set({ 'authorization': token });
+
+      expect(response).to.have.status(200);
+      expect(response.body.role).to.be.eq('admin');
+    });
+
+    it('error when token is invalid', async () => {
+      const response = await chai.request(app).get('/login/validate')
+        .set({ 'authorization': invalidToken });
+
+      expect(response).to.have.status(401);
+      expect(response.body.message).to.be.eq('Invalid token');
     });
   });
 });
