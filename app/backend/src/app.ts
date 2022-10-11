@@ -2,6 +2,7 @@ import * as express from 'express';
 import errorHandler from './middlewares/errorHandler';
 
 import login from './routes/login.routes';
+import teams from './routes/teams.routes';
 
 class App {
   public app: express.Express;
@@ -12,6 +13,7 @@ class App {
     this.config();
 
     this.app.use('/login', login);
+    this.app.use('/teams', teams);
     this.app.get('/', (req, res) => res.json({ ok: true }));
 
     this.app.use(errorHandler);
