@@ -12,4 +12,15 @@ export default class teamController {
       next(error);
     }
   }
+
+  async getById(req: Request, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id, 10);
+
+    try {
+      const team = await this.teamService.getById(id);
+      res.json(team);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
