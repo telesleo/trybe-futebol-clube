@@ -1,6 +1,7 @@
 import IMatch from '../interfaces/IMatch';
 import Match from '../database/models/Match';
 import Team from '../database/models/Team';
+import AppError, { statusCode } from '../utils/error';
 
 export default class MatchService {
   constructor(private matchModel: typeof Match) { }
@@ -29,6 +30,13 @@ export default class MatchService {
   }
 
   async create(match: IMatch): Promise<IMatch> {
+    if (match.homeTeam === match.awayTeam) {
+      throw new AppError(
+        statusCode.UNAUTHORIZED,
+        'It is not possible to create a match with two equal teams',
+      );
+    }
+
     const createdMatch = await this.matchModel.create(match);
 
     return createdMatch;
