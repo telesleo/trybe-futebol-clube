@@ -8,11 +8,11 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 
     const { JWT_SECRET } = process.env;
 
-    const { role } = verify(token, JWT_SECRET as string) as JwtPayload;
+    verify(token, JWT_SECRET as string) as JwtPayload;
 
-    next(role);
+    next();
   } catch (error) {
-    return res.status(statusCode.UNAUTHORIZED).json({ message: 'Invalid token' });
+    return res.status(statusCode.UNAUTHORIZED).json({ message: 'Token must be a valid token' });
   }
 };
 
