@@ -9,5 +9,7 @@ const matchController = new MatchController(new MatchService(Match));
 
 matches.get('/', (req: Request, res: Response, next: NextFunction) =>
   matchController.getAll(req, res, next));
+matches.post('/', (req: Request, res: Response, next: NextFunction) =>
+  matchController.create(req, res, next));
 
 export default matches;
