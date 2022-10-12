@@ -27,4 +27,10 @@ export default class MatchService {
 
     return matches;
   }
+
+  async create(match: IMatch): Promise<IMatch> {
+    const createdMatch = await this.matchModel.create(match);
+
+    return createdMatch;
+  }
 }
