@@ -15,8 +15,11 @@ export default class userController {
     }
   }
 
-  static async getRole(role: string, req: Request, res: Response, next: NextFunction) {
+  static getRole(req: Request, res: Response, next: NextFunction) {
+    const token = req.headers.authorization as string;
+
     try {
+      const role = UserService.getRole(token);
       return res.json({ role });
     } catch (error) {
       return next(error);

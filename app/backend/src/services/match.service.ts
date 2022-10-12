@@ -30,6 +30,13 @@ export default class MatchService {
   }
 
   async create(match: IMatch): Promise<IMatch> {
+    const homeTeam = await Team.findOne({ where: { id: match.homeTeam } });
+    const awayTeam = await Team.findOne({ where: { id: match.awayTeam } });
+
+    if (!homeTeam || !awayTeam) {
+      throw new AppError(statusCode.NOT_FOUND, 'There is no team with such id!');
+    }
+
     if (match.homeTeam === match.awayTeam) {
       throw new AppError(
         statusCode.UNAUTHORIZED,
