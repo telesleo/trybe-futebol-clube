@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { JwtPayload, verify } from 'jsonwebtoken';
 import AppError, { statusCode } from '../utils/error';
 
-const validateLogin = (req: Request, res: Response, next: NextFunction) => {
+const validateToken = (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization as string;
 
@@ -18,4 +18,4 @@ const validateLogin = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default validateLogin;
+export default validateToken;
