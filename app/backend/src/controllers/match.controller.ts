@@ -30,4 +30,15 @@ export default class matchController {
       return next(error);
     }
   }
+
+  async upgrateProgress(req: Request, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id, 10);
+
+    try {
+      await this.matchService.finishMatch(id);
+      return res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
