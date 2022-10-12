@@ -8,7 +8,7 @@ const login = Router();
 
 const userController = new UserController(new UserService(User));
 
-login.get('/validate', validateToken);
+login.get('/validate', validateToken, UserController.getRole);
 login.post('/', (req: Request, res: Response, next: NextFunction) =>
   userController.login(req, res, next));
 

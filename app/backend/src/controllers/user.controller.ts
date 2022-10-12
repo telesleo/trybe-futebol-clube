@@ -14,4 +14,12 @@ export default class userController {
       return next(error);
     }
   }
+
+  static async getRole(role: string, req: Request, res: Response, next: NextFunction) {
+    try {
+      return res.json({ role });
+    } catch (error) {
+      return next(error);
+    }
+  }
 }

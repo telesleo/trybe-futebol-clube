@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { JwtPayload, verify } from 'jsonwebtoken';
-import AppError, { statusCode } from '../utils/error';
+import { statusCode } from '../utils/error';
 
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -10,11 +10,9 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 
     const { role } = verify(token, JWT_SECRET as string) as JwtPayload;
 
-    res.json({ role });
-
-    next();
+    next(role);
   } catch (error) {
-    throw new AppError(statusCode.UNAUTHORIZED, 'Invalid token');
+    return res.status(statusCode.UNAUTHORIZED).json({ message: 'Invalid token' });
   }
 };
 
