@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import IMatch from '../interfaces/IMatch';
+import IMatch, { IGoals } from '../interfaces/IMatch';
 import MatchService from '../services/match.service';
 
 export default class matchController {
@@ -37,6 +37,18 @@ export default class matchController {
     try {
       await this.matchService.finishMatch(id);
       return res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  async upgradeGoals(req: Request, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id, 10);
+    const goals = req.body as IGoals;
+
+    try {
+      const match = await this.matchService.upgradeGoals(id, goals);
+      return res.status(200).json(match);
     } catch (error) {
       return next(error);
     }
