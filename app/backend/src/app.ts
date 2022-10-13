@@ -4,6 +4,7 @@ import errorHandler from './middlewares/errorHandler';
 import login from './routes/login.routes';
 import matches from './routes/matches.routes';
 import teams from './routes/teams.routes';
+import leaderboard from './routes/leaderboard.routes';
 
 class App {
   public app: express.Express;
@@ -16,6 +17,7 @@ class App {
     this.app.use('/login', login);
     this.app.use('/teams', teams);
     this.app.use('/matches', matches);
+    this.app.use('/leaderboard/home', leaderboard);
     this.app.get('/', (req, res) => res.json({ ok: true }));
 
     this.app.use(errorHandler);
