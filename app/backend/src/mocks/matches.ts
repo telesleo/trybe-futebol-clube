@@ -62,6 +62,13 @@ export default [
     awayTeamGoals: 1,
     inProgress: true,
   },
+  {
+    homeTeam: 4,
+    homeTeamGoals: 5,
+    awayTeam: 2,
+    awayTeamGoals: 3,
+    inProgress: true,
+  },
 ];
 
 export const match = {
