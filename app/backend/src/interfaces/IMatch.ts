@@ -12,3 +12,8 @@ export default interface IMatch {
     teamName: string;
   }
 }
+
+export interface IGoals {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+}
