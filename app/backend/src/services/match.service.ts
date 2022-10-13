@@ -1,4 +1,4 @@
-import IMatch from '../interfaces/IMatch';
+import IMatch, { IGoals } from '../interfaces/IMatch';
 import Match from '../database/models/Match';
 import Team from '../database/models/Team';
 import AppError, { statusCode } from '../utils/error';
@@ -55,5 +55,18 @@ export default class MatchService {
     }, {
       where: { id },
     });
+  }
+
+  async upgradeGoals(id: number, goals: IGoals): Promise<IMatch> {
+    await this.matchModel.update({
+      homeTeamGoals: goals.homeTeamGoals,
+      awayTeamGoals: goals.awayTeamGoals,
+    }, {
+      where: { id },
+    });
+
+    const match = await this.matchModel.findOne({ where: { id } }) as IMatch;
+
+    return match;
   }
 }
