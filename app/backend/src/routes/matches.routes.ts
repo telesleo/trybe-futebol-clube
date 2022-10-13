@@ -12,6 +12,8 @@ matches.get('/', (req: Request, res: Response, next: NextFunction) =>
   matchController.getAll(req, res, next));
 matches.post('/', validateToken, (req: Request, res: Response, next: NextFunction) =>
   matchController.create(req, res, next));
+matches.patch('/:id', (req: Request, res: Response, next: NextFunction) =>
+  matchController.upgradeGoals(req, res, next));
 matches.patch('/:id/finish', (req: Request, res: Response, next: NextFunction) =>
   matchController.upgrateProgress(req, res, next));
 
