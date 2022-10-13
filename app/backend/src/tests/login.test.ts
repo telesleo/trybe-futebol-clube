@@ -68,7 +68,7 @@ describe('/login/validate endpoint', () => {
         .set({ 'authorization': invalidToken });
 
       expect(response).to.have.status(401);
-      expect(response.body.message).to.be.eq('Invalid token');
+      expect(response.body.message).to.be.eq('Token must be a valid token');
     });
   });
 });
